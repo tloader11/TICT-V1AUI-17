@@ -1,0 +1,77 @@
+<link rel="import"  href="https://polygit.org/components/polymer/polymer-element.html">
+
+<dom-module id="gerecht-keuze">
+
+  <template>
+    <!-- scoped CSS for this element -->
+    <style>
+      div {
+          margin-bottom: 50px;
+        display: inline-block;
+        background-color: #ccc;
+        border-radius: 8px;
+        padding: 4px;
+      }
+      .keuze.false
+        {
+            display: none;
+        }
+      .keuze
+        {
+            width: 350px;
+            height: 95px;
+            
+        }
+       .keuze h2
+        {
+            margin-top: 5px;
+            padding-left: 15px;
+            margin-bottom: 0px;
+        }
+        .keuze p
+        {
+            display: inline-block;
+            padding-left: 15px;
+        }
+        .keuze input
+        {
+            float: right;
+            margin-top: 45px;
+        }
+    </style>
+    <div class$="keuze {{beschikbaar}}">
+      <h2>[[naam]]</h2>
+      <p>&euro; [[prijs]]</p>
+        <input type="checkbox" value="[[id]]" name='gerechtID'/>
+      <!-- any children are rendered here -->
+      <slot></slot>
+    </div>
+  </template>
+
+  <script>
+    class GerechtKeuze extends Polymer.Element {
+         static get is() { return "gerecht-keuze"; }
+         static get properties() {
+          return {
+            naam: String,
+            prijs: Number,
+            beschikbaar: Boolean,
+            id: Number
+          }
+        }
+
+        connectedCallback() {
+          super.connectedCallback();
+            if(this.beschikbaar != true)
+                {
+                    this.beschikbaar = false;
+                }
+
+          // render
+          //this.textContent = 'Hello World, my user is ' + (this.user || 'nobody');
+        }
+      }
+    customElements.define(GerechtKeuze.is, GerechtKeuze);
+  </script>
+
+</dom-module>
