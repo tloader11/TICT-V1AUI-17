@@ -42,13 +42,15 @@
     <div class$="keuze {{beschikbaar}}">
       <h2>[[naam]]</h2>
       <p>&euro; [[prijs]]</p>
-        <input type="checkbox" value="[[id]]" name='gerechtID' id="gerechtID"/>
+        <input type="checkbox" value="[[id]]" name='gerechtID' id="gerechtID" checked$="{{checked}}" />
       <!-- any children are rendered here -->
       <slot></slot>
     </div>
   </template>
 
   <script>
+      var numbers = [];
+      
     class GerechtKeuze extends Polymer.Element {
          static get is() { return "gerecht-keuze"; }
          ready() {
@@ -57,8 +59,17 @@
             }
 
             _onClick(event) {
-              var master = $(event.target);
-              console.log(master.children());
+              var master = $(event.target).prop('id');
+                var idx = $.inArray(master, numbers);
+                if (idx == -1) {
+                  numbers.push(master);
+                    this.checked = true;
+                } else {
+                  numbers.splice(idx, 1);
+                    this.checked = false;
+                    $(event.target).removeAttr('checked');
+                }
+                console.log(numbers);
             }
          static get properties() {
           return {
@@ -66,10 +77,7 @@
             prijs: Number,
             beschikbaar: Boolean,
             id: Number,
-            checked: {
-                type: Boolean,
-                value: false  // initial value required for binding
-              }
+            checked: Boolean
           }
         }
         connectedCallback() {
