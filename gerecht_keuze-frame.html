@@ -42,7 +42,7 @@
     <div class$="keuze {{beschikbaar}}">
       <h2>[[naam]]</h2>
       <p>&euro; [[prijs]]</p>
-        <input type="checkbox" value="[[id]]" name='gerechtID'/>
+        <input type="checkbox" value="[[id]]" name='gerechtID' id="gerechtID"/>
       <!-- any children are rendered here -->
       <slot></slot>
     </div>
@@ -51,15 +51,27 @@
   <script>
     class GerechtKeuze extends Polymer.Element {
          static get is() { return "gerecht-keuze"; }
+         ready() {
+              this.addEventListener('click', this._onClick);
+              super.ready();
+            }
+
+            _onClick(event) {
+              var master = $(event.target);
+              console.log(master.children());
+            }
          static get properties() {
           return {
             naam: String,
             prijs: Number,
             beschikbaar: Boolean,
-            id: Number
+            id: Number,
+            checked: {
+                type: Boolean,
+                value: false  // initial value required for binding
+              }
           }
         }
-
         connectedCallback() {
           super.connectedCallback();
             if(this.beschikbaar != true)
