@@ -15,11 +15,6 @@
           {
               margin-right: 240px;
           }
-          .content button
-          {
-            float: right;
-            padding: 20px;
-          }
       </style>
   </head>
   <body>
@@ -38,24 +33,22 @@
                     case 5: return "Onbeperkt mixed grill"; break;
                 }
         }
-        var storedNames = JSON.parse(localStorage.getItem("serv"));
-        for(var name in storedNames)
-            {
-                var naam = getNameFromID(storedNames[name]);
-                bestellingen += "<div><gerecht-serveren naam=\""+naam+"\" id="+storedNames[name]+"></gerecht-serveren></div>";
-            }
-        console.log(bestellingen);
-        $(".content").append(bestellingen);
-        if(storedNames.length <= 0)
+        var storedserv = JSON.parse(localStorage.getItem("serv"));
+        if(storedserv.length > 0)
         {
-             $(".content").prepend("<center><h2>Er zijn op dit moment geen bestellingen gereed voor het serveren!</h2></center>");
+             $(".content").prepend("<h2>Nog niet alles is geserveerd. Nog even geduld AUB.</h2>");
         }
+       else
+           {
+               $(".content").prepend("<h2>Alles is geserveerd. Eet smakelijk!</h2><button type=\"button\">Alles is afgeruimd</button>");
+           }
             });
     </script>
-      
+      <center>
       <div class="content">
             <!-- <gerecht-bereiden naam="Warme soep" orderno=12 q=2 checked></gerecht-keuze> -->
           
       </div>
+          </center>
   </body>
 </html>

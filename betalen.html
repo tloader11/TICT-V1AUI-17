@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="https://polygit.org/components/webcomponentsjs/webcomponents-loader.js"></script>
+      <style>
+          .content
+          {
+              padding-top: 50px;
+              max-width: 960px;
+              margin: auto;
+          }
+          .content gerecht-keuze:nth-child(odd)
+          {
+              margin-right: 240px;
+          }
+      </style>
+  </head>
+  <body>
+      <script>
+          function bedankt()
+          {
+              $(".content").empty();
+              $(".content").append("<h1>Bedankt en tot ziens!</h1>");
+              var start = new Date().getTime();
+               var end = start;
+               while(end < start + 5000) {
+                 end = new Date().getTime();
+              }
+              window.location.href="index.html";
+          }
+      </script>
+      <center>
+      <div class="content">
+            <h2>Betaalmethode</h2>
+          <br>
+          <br>
+            <input list="benkz" name="benkz">
+             <datalist id="benkz">
+                <option value="ING">
+                <option value="ABN AMBRO">
+                <option value="Icesave">
+                <option value="KNAP BANK">
+                <option value="Voedselbank">
+              </datalist>
+          <br>
+          <br><!-- /* dit zorgt voor innerlijke rust */ -->
+          <br>
+          <h3>Betaal status:&ensp;&ensp;&ensp;&ensp;&ensp; <button onclick="bedankt();">OK</button>&ensp;&ensp;<button>Print BON</button></h3>
+      </div>
+          </center>
+  </body>
+</html>
