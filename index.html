@@ -3,8 +3,6 @@
   <head>
     <script src="jquery-3.3.1.min.js"></script>
     <script src="https://polygit.org/components/webcomponentsjs/webcomponents-loader.js"></script>
-    <link rel="import" href="custom-element.html">
-    <link rel="import" href="picture-frame.html">
     <link rel="import" href="gerecht_keuze-frame.html">
       <style>
           .content
@@ -25,24 +23,27 @@
       </style>
       <script>
           
-      function checkBoxClicked()
-      {
-          console.log("gay");
-      }
+      function SUBMIT()
+          {
+              //var requestURI = $.param( {IDs: numbers});
+              localStorage.setItem("IDs", '');
+              localStorage.setItem("IDs", JSON.stringify(numbers));
+              window.location.href  = "wait.html";
+          }
               
       </script>
   </head>
   <body>
       <div class="content">
-          <form method="get" action="kok.html" >
+          <form class="GerechtKiezenForm" method="get" action="javascript:SUBMIT();" >
             <gerecht-keuze naam="Warme soep" prijs=12 beschikbaar id=1></gerecht-keuze>
             <gerecht-keuze naam="Kartoffel Salat" prijs=1.20 beschikbaar id=2></gerecht-keuze>
-            <gerecht-keuze naam="Gestoofte waterkonijn" prijs=65 beschikbaar id=3></gerecht-keuze>
+            <gerecht-keuze naam="Gestoofde waterkonijn" prijs=65 beschikbaar id=3></gerecht-keuze>
             <gerecht-keuze naam="Kibbeling" prijs=6 beschikbaar id=4></gerecht-keuze>
             <gerecht-keuze naam="Onbeperkt mixed grill" prijs=24 beschikbaar id=5></gerecht-keuze>
             <gerecht-keuze naam="Gebakken lucht" prijs=99 id=6></gerecht-keuze>
           
-          <button class="GerechtKiezenSubmit" type="submit">Bestelling Afronden</button></form>
+          <button class="GerechtKiezenSubmit" type="submit" >Bestelling Afronden</button></form>
           
       </div>
   </body>

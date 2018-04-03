@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="https://polygit.org/components/webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="import" href="gerecht_serveren-frame.html">
+      <style>
+          .content
+          {
+              padding-top: 50px;
+              max-width: 960px;
+              margin: auto;
+          }
+          .content gerecht-keuze:nth-child(odd)
+          {
+              margin-right: 240px;
+          }
+          .content button
+          {
+            float: right;
+            padding: 20px;
+          }
+      </style>
+  </head>
+  <body>
+      
+    <script>
+        jQuery(document).ready(function(){
+        var bestellingen = "";
+        function getNameFromID(id)
+        {
+            switch(id)
+                {
+                    case 1: return "Warme soep"; break;
+                    case 2: return "Kartoffel Salat"; break;
+                    case 3: return "Gestoofde waterkonijn"; break;
+                    case 4: return "Kibbeling"; break;
+                    case 5: return "Onbeperkt mixed grill"; break;
+                }
+        }
+        var storedNames = JSON.parse(localStorage.getItem("serv"));
+        for(var name in storedNames)
+            {
+                var naam = getNameFromID(storedNames[name]);
+                bestellingen += "<div><gerecht-serveren naam=\""+naam+"\" id="+storedNames[name]+"></gerecht-serveren></div>";
+            }
+        console.log(bestellingen);
+        $(".content").append(bestellingen);
+            });
+    </script>
+      
+      <div class="content">
+            <!-- <gerecht-bereiden naam="Warme soep" orderno=12 q=2 checked></gerecht-keuze> -->
+          
+      </div>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+<link rel="import"  href="https://polygit.org/components/polymer/polymer-element.html">
+
+<dom-module id="gerecht-bereiden">
+
+  <template>
+    <!-- scoped CSS for this element -->
+    <style>
+      div {
+          margin-bottom: 50px;
+        display: inline-block;
+        background-color: #ccc;
+        border-radius: 8px;
+        padding: 4px;
+      }
+      .bestelling
+        {
+            width: 400px;
+        }
+        .bestelling span
+        {
+            display: inline-block;
+            float: right;
+            margin-top: -30px;
+        }
+    </style>
+    <div class="bestelling">
+      <h2>Naam: [[naam]]</h2>
+      <p>Ordernummer: [[orderno]]</p>
+      <p>Kwantiteit: [[q]]</p>
+        <span>Beschikbaar <input type="checkbox" checked$="{{checked}}" /></span>
+      <!-- any children are rendered here -->
+      <slot></slot>
+    </div>
+  </template>
+
+    
+    
+  <script>
+      
+    class GerechtBereiden extends Polymer.Element {
+         static get is() { return "gerecht-bereiden"; }
+         ready() {
+              this.addEventListener('click', this._onClick);
+              super.ready();
+            }
+
+            _onClick(event) {
+              var master = $(event.target);
+              var resu = confirm("Bestelling afgerond?")
+              if(resu) { 
+                  master.remove(); 
+                  var storedNames = JSON.parse(localStorage.getItem("IDs"));
+                  var storedserv = JSON.parse(localStorage.getItem("serv"));
+                  if(storedserv == null)
+                      {
+                          storedserv = Array();
+                      }
+                  var master = master.prop('id');
+                  for(var name in storedNames)
+                      {
+                         var vall = storedNames[name]; //name=key, returnvalue is value.   
+                          console.log(master);
+                          if(vall == master)
+                              {
+                                  storedNames.splice(name, 1); //remove from array
+                                  storedserv.push(storedNames[name]);
+                              }
+                      }
+                  
+              localStorage.setItem("serv", JSON.stringify(storedserv));
+              localStorage.setItem("IDs", '');
+              localStorage.setItem("IDs", JSON.stringify(storedNames));
+                  
+              }
+                
+            }
+         static get properties() {
+          return {
+            naam:    String,
+            orderno: Number,
+            q:       Number,
+            checked: Boolean,
+            id:      Number
+          }
+        }
+        connectedCallback() {
+          super.connectedCallback();
+            if(this.beschikbaar != true)
+                {
+                    this.beschikbaar = false;
+                }
+
+          // render
+          //this.textContent = 'Hello World, my user is ' + (this.user || 'nobody');
+        }
+      }
+    customElements.define(GerechtBereiden.is, GerechtBereiden);
+  </script>
+
+</dom-module>

@@ -1,0 +1,83 @@
+<link rel="import"  href="https://polygit.org/components/polymer/polymer-element.html">
+
+<dom-module id="gerecht-serveren">
+
+  <template>
+    <!-- scoped CSS for this element -->
+    <style>
+      div {
+          margin-bottom: 50px;
+        display: inline-block;
+        background-color: #ccc;
+        border-radius: 8px;
+        padding: 4px;
+      }
+      .bestelling
+        {
+            width: 400px;
+        }
+        .bestelling span
+        {
+            display: inline-block;
+            float: right;
+            margin-top: -30px;
+        }
+    </style>
+    <div class="bestelling">
+      <h2>Naam: [[naam]]</h2>
+      <!-- any children are rendered here -->
+      <slot></slot>
+    </div>
+  </template>
+
+    
+    
+  <script>
+      
+    class GerechtServeren extends Polymer.Element {
+         static get is() { return "gerecht-serveren"; }
+         ready() {
+              this.addEventListener('click', this._onClick);
+              super.ready();
+            }
+
+            _onClick(event) {
+              var master = $(event.target);
+              var resu = confirm("Bestelling geserveerd?")
+              if(resu) { 
+                  master.remove(); 
+                  var storedNames = JSON.parse(localStorage.getItem("serv"));
+                  var master = master.prop('id');
+                  for(var name in storedNames)
+                      {
+                         var vall = storedNames[name]; //name=key, returnvalue is value.   
+                          console.log(master);
+                          if(vall == master)
+                              {
+                                  storedNames.splice(name, 1); //remove from array
+                              }
+                      }
+                  
+              }
+                
+              localStorage.setItem("serv", JSON.stringify(storedNames));
+                
+                
+            }
+         static get properties() {
+          return {
+            naam:    String,
+            id:      Number
+          }
+        }
+        connectedCallback() {
+          super.connectedCallback();
+
+          // render
+          //this.textContent = 'Hello World, my user is ' + (this.user || 'nobody');
+        }
+      }
+    customElements.define(GerechtServeren.is, GerechtServeren);
+  </script>
+
+</dom-module>

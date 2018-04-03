@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="https://polygit.org/components/webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="import" href="custom-element.html">
+    <link rel="import" href="picture-frame.html">
+    <link rel="import" href="gerecht_keuze-frame.html">
+      <style>
+          .content
+          {
+              padding-top: 50px;
+              max-width: 960px;
+              margin: auto;
+          }
+          .content gerecht-keuze:nth-child(odd)
+          {
+              margin-right: 240px;
+          }
+          .content button
+          {
+            float: right;
+            padding: 20px;
+          }
+      </style>
+  </head>
+  <body>
+      <script>
+          function goBestellen()
+          {
+              //ga doen dan!
+              window.location.href = "index.html";
+          }
+          function goAfrekenen()
+          {
+              window.location.href = "afrekenen.html";
+          }
+      </script>
+      <div class="content">
+          <center><h1>ID: 54</h1><h1>Uw gerecht(en) word(en) binnenkort geserveerd!</h1>
+          <br><br><br><br><br>
+          <button onclick="goBestellen();" style="float: left;">Meer Bestellen</button>
+          <button onclick="goAfrekenen();">Afrekenen</button></center>
+      </div>
+  </body>
+</html>
