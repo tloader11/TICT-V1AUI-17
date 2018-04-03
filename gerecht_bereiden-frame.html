@@ -59,14 +59,14 @@
                   for(var name in storedNames)
                       {
                          var vall = storedNames[name]; //name=key, returnvalue is value.   
-                          console.log(master);
+                          //console.log(master);
                           if(vall == master)
                               {
                                   storedNames.splice(name, 1); //remove from array
-                                  storedserv.push(storedNames[name]);
+                                  storedserv.push(vall);
                               }
                       }
-                  
+            
               localStorage.setItem("serv", JSON.stringify(storedserv));
               localStorage.setItem("IDs", '');
               localStorage.setItem("IDs", JSON.stringify(storedNames));
